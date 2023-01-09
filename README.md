@@ -1,2 +1,1 @@
-# eightking
-eightking board game
+"# tablero2"  "# tablero2" 
