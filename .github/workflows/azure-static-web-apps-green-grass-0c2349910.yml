@@ -1,31 +1,14 @@
-{
-    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-    "contentVersion": "1.0.0.0",
-    "parameters": {
-        "staticSites_eightking_name": {
-            "defaultValue": "eightking",
-            "type": "String"
-        }
-    },
-    "variables": {},
-    "resources": [
-        {
-            "type": "Microsoft.Web/staticSites",
-            "apiVersion": "2022-03-01",
-            "name": "[parameters('staticSites_eightking_name')]",
-            "location": "Central US",
-            "sku": {
-                "name": "Free",
-                "tier": "Free"
-            },
-            "properties": {
-                "repositoryUrl": "[concat('https://github.com/ijoakin/', parameters('staticSites_eightking_name'))]",
-                "branch": "main",
-                "stagingEnvironmentPolicy": "Enabled",
-                "allowConfigFileUpdates": true,
-                "provider": "GitHub",
-                "enterpriseGradeCdnStatus": "Disabled"
-            }
-        }
-    ]
-}
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps: 
+    - name: Checkout the code
+      uses: actions/checkout@v3
+    - name: Deploy the website
+      uses: tibor19/static-website-deploy@v2
+      with:
+        enabled-static-website: 'true'
+        folder: 'MyFolder'
+        connection-string: ${{ secrets.CONNECTION_STRING }}
