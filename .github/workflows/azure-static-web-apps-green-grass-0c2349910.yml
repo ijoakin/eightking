@@ -11,4 +11,4 @@ jobs:
       with:
         enabled-static-website: 'true'
         folder: 'MyFolder'
-        connection-string: ${{ secrets.CONNECTION_STRING }}
+        
